@@ -214,7 +214,7 @@ tqdm==4.67.1
     # via
     #   huggingface-hub
     #   transformers
-transformers==4.40.0
+transformers==4.48.0
     # via llama-2-13b-chat (pyproject.toml)
 triton==3.0.0
     # via torch
