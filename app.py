@@ -59,7 +59,7 @@ def generate(
     conversation.append({"role": "user", "content": message})
 
     inputs = tokenizer.apply_chat_template(conversation, tokenize=False)
-    inputs = tokenizer(inputs, return_tensors='pt', return_token_type_ids=False)
+    input_ids = tokenizer(inputs, return_tensors='pt', return_token_type_ids=False).input_ids
 
     # input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
     if input_ids.shape[1] > MAX_INPUT_TOKEN_LENGTH:
