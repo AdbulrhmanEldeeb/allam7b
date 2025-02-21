@@ -243,4 +243,4 @@ uvicorn==0.34.0
     # via gradio
 websockets==14.1
     # via gradio-client
-tintoken
+tiktoken
