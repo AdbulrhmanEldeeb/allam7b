@@ -36,10 +36,9 @@ if not torch.cuda.is_available():
 
 
 if torch.cuda.is_available():
-    model_id = "meta-llama/Llama-2-13b-chat-hf"
-    model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", load_in_4bit=True)
+    model_id = "ALLaM-AI/ALLaM-7B-Instruct-preview"
+    model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    tokenizer.use_default_system_prompt = False
 
 
 @spaces.GPU
@@ -49,7 +48,7 @@ def generate(
     system_prompt: str = "",
     max_new_tokens: int = 1024,
     temperature: float = 0.6,
-    top_p: float = 0.9,
+    top_p: float = 0.95,
     top_k: int = 50,
     repetition_penalty: float = 1.2,
 ) -> Iterator[str]:
@@ -59,7 +58,10 @@ def generate(
     conversation += chat_history
     conversation.append({"role": "user", "content": message})
 
-    input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
+    inputs = tokenizer.apply_chat_template(conversation, tokenize=False)
+    inputs = tokenizer(inputs, return_tensors='pt', return_token_type_ids=False)
+
+    # input_ids = tokenizer.apply_chat_template(conversation, return_tensors="pt")
     if input_ids.shape[1] > MAX_INPUT_TOKEN_LENGTH:
         input_ids = input_ids[:, -MAX_INPUT_TOKEN_LENGTH:]
         gr.Warning(f"Trimmed input from conversation as it was longer than {MAX_INPUT_TOKEN_LENGTH} tokens.")
