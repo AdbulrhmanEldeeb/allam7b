@@ -9,3 +9,8 @@ h1 {
   background: #1565c0;
   border-radius: 100vh;
 }
+/* Right-align Arabic text */
+.chat-message {
+    text-align: right;
+    direction: rtl;
+}
