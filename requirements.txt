@@ -245,3 +245,4 @@ websockets==14.1
     # via gradio-client
 tiktoken
 blobfile
+sentencepiece
