@@ -125,6 +125,12 @@ chat_interface = gr.ChatInterface(
     ],
     cache_examples=False,
     type="messages",
+    css="""
+    .chat-message {
+        text-align: right;
+        direction: rtl;
+    }
+    """,
 )
 
 with gr.Blocks(css_paths="style.css", fill_height=True) as demo:
