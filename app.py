@@ -12,24 +12,14 @@ DEFAULT_MAX_NEW_TOKENS = 1024
 MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "4096"))
 
 DESCRIPTION = """\
-# Llama-2 13B Chat
+# ALLaM-7B Instruct
 
-This Space demonstrates model [Llama-2-13b-chat](https://huggingface.co/meta-llama/Llama-2-13b-chat) by Meta, a Llama 2 model with 13B parameters fine-tuned for chat instructions. Feel free to play with it, or duplicate to run generations without a queue! If you want to run your own service, you can also [deploy the model on Inference Endpoints](https://huggingface.co/inference-endpoints).
+This Space demonstrates model [ALLaM-7B-Instruct-preview](https://huggingface.co/ALLaM-AI/ALLaM-7B-Instruct-preview) by National Center for Artificial Intelligence (NCAI) at the Saudi Data and AI Authority (SDAIA)! 
 
-🔎 For more details about the Llama 2 family of models and how to use them with `transformers`, take a look [at our blog post](https://huggingface.co/blog/llama2).
-
-🔨 Looking for an even more powerful model? Check out the large [**70B** model demo](https://huggingface.co/spaces/ysharma/Explore_llamav2_with_TGI).
-🐇 For a smaller model that you can run on many GPUs, check our [7B model demo](https://huggingface.co/spaces/huggingface-projects/llama-2-7b-chat).
+ALLaM works with both the Arabic and English languages. 
 
 """
 
-LICENSE = """
-<p/>
-
----
-As a derivate work of [Llama-2-13b-chat](https://huggingface.co/meta-llama/Llama-2-13b-chat) by Meta,
-this demo is governed by the original [license](https://huggingface.co/spaces/huggingface-projects/llama-2-13b-chat/blob/main/LICENSE.txt) and [acceptable use policy](https://huggingface.co/spaces/huggingface-projects/llama-2-13b-chat/blob/main/USE_POLICY.md).
-"""
 
 if not torch.cuda.is_available():
     DESCRIPTION += "\n<p>Running on CPU 🥶 This demo does not work on CPU.</p>"
@@ -45,7 +35,7 @@ if torch.cuda.is_available():
 def generate(
     message: str,
     chat_history: list[dict],
-    system_prompt: str = "",
+    system_prompt: str = "أنت علام، مساعد ذكاء اصطناعي مطور من الهيئة السعودية للبيانات والذكاء الاصطناعي، تجيب على الأسئلة بطريقة مفيدة مع مراعاة القيم الثقافية المحلية.",
     max_new_tokens: int = 1024,
     temperature: float = 0.6,
     top_p: float = 0.95,
@@ -130,11 +120,8 @@ chat_interface = gr.ChatInterface(
     ],
     stop_btn=None,
     examples=[
-        ["Hello there! How are you doing?"],
-        ["Can you explain briefly to me what is the Python programming language?"],
-        ["Explain the plot of Cinderella in a sentence."],
-        ["How many hours does it take a man to eat a Helicopter?"],
-        ["Write a 100-word article on 'Benefits of Open-Source in AI research'"],
+        ["كيف أجهز كوب شاهي؟"],
+        ["ازيك يسطا عامل ايه؟"],
     ],
     cache_examples=False,
     type="messages",
@@ -143,7 +130,6 @@ chat_interface = gr.ChatInterface(
 with gr.Blocks(css_paths="style.css", fill_height=True) as demo:
     gr.Markdown(DESCRIPTION)
     chat_interface.render()
-    gr.Markdown(LICENSE)
 
 if __name__ == "__main__":
     demo.queue(max_size=20).launch()
