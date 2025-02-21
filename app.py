@@ -14,7 +14,7 @@ MAX_INPUT_TOKEN_LENGTH = int(os.getenv("MAX_INPUT_TOKEN_LENGTH", "4096"))
 DESCRIPTION = """\
 # ALLaM-7B Instruct
 
-This Space demonstrates model [ALLaM-7B-Instruct-preview](https://huggingface.co/ALLaM-AI/ALLaM-7B-Instruct-preview) by National Center for Artificial Intelligence (NCAI) at the Saudi Data and AI Authority (SDAIA)! 
+This Space demonstrates the LLM [ALLaM-7B-Instruct-preview](https://huggingface.co/ALLaM-AI/ALLaM-7B-Instruct-preview) by National Center for Artificial Intelligence (NCAI) at the Saudi Data and AI Authority (SDAIA)! 
 
 ALLaM works with both the Arabic and English languages. 
 
